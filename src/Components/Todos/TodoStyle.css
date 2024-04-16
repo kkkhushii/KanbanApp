@@ -118,3 +118,7 @@ color: #635bff;
 .AddTaskstyle{
     margin-bottom: 10px;
 }
+.react-datepicker-wrapper{
+    width: 100%;
+
+}

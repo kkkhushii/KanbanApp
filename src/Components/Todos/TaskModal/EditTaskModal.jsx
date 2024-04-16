@@ -4,8 +4,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function EditTaskModal({ show, onHide, task, editedTask, setEditedTask, onSave }) {
-
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setEditedTask({ ...editedTask, [name]: value });
@@ -22,6 +20,16 @@ function EditTaskModal({ show, onHide, task, editedTask, setEditedTask, onSave }
         setEditedTask({ ...editedTask, date: formattedDate });
 
     };
+    const handleImageChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setEditedTask({ ...editedTask, taskImage: reader.result });
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
     return (
         <Modal show={show} onHide={onHide}>
@@ -36,11 +44,30 @@ function EditTaskModal({ show, onHide, task, editedTask, setEditedTask, onSave }
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Task Text</label>
-                        {typeof editedTask.taskText === 'string' && editedTask.taskText.endsWith('.jpg') ? (
-                            <textarea className="form-control" name="taskText" value="" />
+                        <textarea className="form-control" name="taskText" value={editedTask.taskText} onChange={handleChange} />
 
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Task Image</label>
+                        {editedTask.taskImage ? (
+                            <div>
+                                <img src={editedTask.taskImage} alt="Task Image" className="img-fluid" />
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    className="form-control"
+                                    name="taskImageFile"
+                                    onChange={(e) => handleImageChange(e)}
+                                />
+                            </div>
                         ) : (
-                            <textarea className="form-control" name="taskText" value={editedTask.taskText} onChange={handleChange} />
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="form-control"
+                                name="taskImageFile"
+                                onChange={(e) => handleImageChange(e)}
+                            />
                         )}
                     </div>
                     <div className="mb-3">

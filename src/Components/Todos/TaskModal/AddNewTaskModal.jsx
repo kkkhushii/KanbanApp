@@ -10,11 +10,14 @@ function AddNewList({ show, onHide, onSave, taskProperties }) {
     const [selectedProperty, setSelectedProperty] = useState('');
     const [maxId, setMaxId] = useState(5);
     const [dueDate, setDueDate] = useState();
+    const [imageURL, setImageURL] = useState();
+
 
     // whenever page load than display current date in datepicker
     useEffect(() => {
         setDueDate(new Date());
     }, [show]);
+
 
     const handleSave = () => {
         const formattedDueDate = dueDate ? dueDate.toLocaleDateString('en-US', {
@@ -23,8 +26,7 @@ function AddNewList({ show, onHide, onSave, taskProperties }) {
         }) : '';
 
         const newId = maxId + 1;
-        // const newid = uniqueId();
-        onSave({ id: newId, task, taskText, date: formattedDueDate, taskProperty: selectedProperty });
+        onSave({ id: newId, task, taskText, taskImage: imageURL, date: formattedDueDate, taskProperty: selectedProperty });
         setTask('');
         setTaskText('');
         setSelectedProperty(selectedProperty);
@@ -33,8 +35,11 @@ function AddNewList({ show, onHide, onSave, taskProperties }) {
         onHide();
 
     };
-
-
+    const imageChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setImageURL(URL.createObjectURL(e.target.files[0]));
+        }
+    };
     return (
         <Modal show={show} onHide={onHide}>
             <Modal.Header closeButton>
@@ -43,7 +48,6 @@ function AddNewList({ show, onHide, onSave, taskProperties }) {
             <Modal.Body>
                 <Form>
                     <Form.Group controlId="task" className='AddTaskstyle'>
-
                         <Form.Control
                             type="text"
                             placeholder="task"
@@ -51,17 +55,26 @@ function AddNewList({ show, onHide, onSave, taskProperties }) {
                             onChange={(e) => setTask(e.target.value)}
                         />
                     </Form.Group>
-
                     <Form.Group controlId="taskText" className='AddTaskstyle'>
-
-                        <Form.Control
-                            as="textarea"
-                            rows={2}
-                            placeholder="task text"
-                            value={taskText}
-                            onChange={(e) => setTaskText(e.target.value)}
-                        />
+                        <Form.Group controlId="taskText" className='AddTaskstyle'>
+                            <Form.Control
+                                as="textarea"
+                                rows={2}
+                                placeholder="task text"
+                                value={taskText}
+                                onChange={(e) => setTaskText(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="taskText" className='AddTaskstyle'>
+                            <Form.Control
+                                type='text'
+                                placeholder="add image url"
+                                onChange={(e) => setImageURL(e.target.value)}
+                            />
+                        </Form.Group>
+                        <img src={imageURL} alt="Selected" style={{ width: '100%', height: 'auto' }} />
                     </Form.Group>
+
                     <Form.Group controlId="taskProperty" className='AddTaskstyle'>
                         <Form.Select
                             value={selectedProperty}

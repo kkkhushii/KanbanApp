@@ -14,15 +14,7 @@ function TaskCoponent({ task, onDeleteTask }) {
 
     const handleShowEditModal = () => setShowEditModal(true);
     const handleCloseEditModal = () => setShowEditModal(false);
-    /// this is for static color for taskproperty
-    // const backgroundColor = task.taskProperty === 'Design' ? '#36c76c' :
-    //     task.taskProperty === 'Developement' ? '#ffd648' :
-    //         task.taskProperty === 'Mobile' ? '#635bff' :
-    //             task.taskProperty === 'UX Stage' ? '#ffd648' :
-    //                 task.taskProperty === 'Research' ? '#46caeb' :
-    //                     task.taskProperty === 'Data Science' ? '#ff6692' :
-    //                         task.taskProperty === 'Branding' ? '#36c76c' : '#fff';
-    // this is for if any edit than use this 
+
     const backgroundColor = editedTask.taskProperty === 'Design' ? '#36c76c' :
         editedTask.taskProperty === 'Developement' ? '#ffd648' :
             editedTask.taskProperty === 'Mobile' ? '#635bff' :
@@ -31,13 +23,9 @@ function TaskCoponent({ task, onDeleteTask }) {
                         editedTask.taskProperty === 'Data Science' ? '#ff6692' :
                             editedTask.taskProperty === 'Branding' ? '#36c76c' : '#fff';
 
-
     const handleSaveEditedTask = () => {
-        // console.log('Edited Task:', editedTask);
-        // setEditedTask(editedTask);
         handleCloseEditModal();
     };
-
     const handleDeleteClick = () => {
         onDeleteTask(task.id);
     };
@@ -52,7 +40,6 @@ function TaskCoponent({ task, onDeleteTask }) {
                         <Dropdown.Toggle id="dropdown-basic" variant="none" className="custom-toggle" >
                             <MoreVertIcon />
                         </Dropdown.Toggle>
-
                         <Dropdown.Menu>
                             <Dropdown.Item onClick={handleShowEditModal}><EditIcon />  Edit</Dropdown.Item>
                             <Dropdown.Item onClick={handleDeleteClick}> <DeleteIcon /> Delete</Dropdown.Item>
@@ -69,13 +56,12 @@ function TaskCoponent({ task, onDeleteTask }) {
                 </div>
             </div>
             <div className='task-content'>
-                {typeof task.taskText === 'string' && task.taskText.endsWith('.jpg') ? (
 
-                    <img src={task.taskText} alt="Task Image" className='img-fluid' />
-                ) : (
-                    <p>{editedTask.taskText}</p>
+                {editedTask.taskImage && (
+                    <img src={editedTask.taskImage} alt="Task Image" className='img-fluid' />
                 )}
             </div>
+            <div className='task-content'><p>{editedTask.taskText}</p></div>
             <div className="task-body">
                 <div className="task-bottom">
                     <div className="tb-section-1">

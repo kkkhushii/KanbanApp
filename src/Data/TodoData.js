@@ -12,7 +12,8 @@ const TodoData = [
         {
             id: 1,
             task: 'This is first task',
-            taskText:image1,
+            taskImage:image1,
+            taskText: '',
             date: '24 july',
             taskProperty: 'Design'
     
@@ -20,6 +21,7 @@ const TodoData = [
         {
             id: 2,
             task: 'lets do some task on pd',
+            taskImage:'',
             taskText:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, o eiusmod tempor incid.',
             date: '24 july',
             taskProperty: 'Developement',
@@ -29,6 +31,8 @@ const TodoData = [
         {
             id: 3,
             task: 'Do some projects on React Native with Flutter',
+
+            taskImage:'',
             taskText:'',
             date: '24 july',
             taskProperty: 'Mobile',
@@ -43,6 +47,7 @@ const TodoData = [
         {
             id: 1,
             task: 'Design navigation changes',
+            taskImage:'',
             taskText:'',
             date: '24 july',
             taskProperty: 'Mobile',
@@ -51,7 +56,8 @@ const TodoData = [
         {
             id: 2,
             task: 'Battle with fire',
-            taskText:image2,
+            taskImage:image2,
+            taskText:'',
             date: '24 july',
             taskProperty: 'Design',
     
@@ -59,6 +65,7 @@ const TodoData = [
         {
             id: 3,
             task: 'First design concept',
+            taskImage:'',
             taskText:'',
             date: '24 july',
             taskProperty: 'Mobile',
@@ -74,6 +81,7 @@ const TodoData = [
         {
             id: 7,
             task: 'Persona development',
+            taskImage:'',
             taskText:'Create user personas based on the research data to represent different user groups and their characteristics, gols, and behaviors..',
             date: '24 july',
             taskProperty: 'UX Stage',
@@ -82,7 +90,8 @@ const TodoData = [
         {
             id: 8,
             task: 'Redesign overview',
-            taskText:image3,
+            taskImage:image3,
+            taskText:'',
             date: '14 july',
             taskProperty: 'Design',
             category:'Pending'
@@ -98,7 +107,8 @@ const TodoData = [
         {
             id: 9,
             task: 'Usability testing',
-            taskText:image4,
+            taskImage:image4,
+            taskText:'',
             date: '24 july',
             taskProperty: 'Research',
             category:'Done'
@@ -107,6 +117,7 @@ const TodoData = [
         {
             id: 10,
             task: 'Introduce new navigation',
+            taskImage:'',
             taskText:'',
             date: '24 july',
             taskProperty: 'Data Science',
@@ -116,6 +127,7 @@ const TodoData = [
         {
             id:11,
             task:'Branding visual identity',
+            taskImage:'',
             taskText:'',
             date: '4 july',
             taskProperty: 'Branding',
@@ -124,6 +136,7 @@ const TodoData = [
         {
             id:12,
             task:'Competitor research',
+            taskImage:'',
             taskText:"research competitors and identify weakness and strengths each of them. comparing their product features, quelity...",
             date: '14 july',
             taskProperty: 'UX Stage',
