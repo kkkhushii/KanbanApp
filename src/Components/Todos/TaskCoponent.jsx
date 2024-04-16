@@ -14,25 +14,33 @@ function TaskCoponent({ task, onDeleteTask }) {
 
     const handleShowEditModal = () => setShowEditModal(true);
     const handleCloseEditModal = () => setShowEditModal(false);
-
-    const backgroundColor = task.taskProperty === 'Design' ? '#36c76c' :
-        task.taskProperty === 'Developement' ? '#ffd648' :
-            task.taskProperty === 'Mobile' ? '#635bff' :
-                task.taskProperty === 'UX Stage' ? '#ffd648' :
-                    task.taskProperty === 'Research' ? '#46caeb' :
-                        task.taskProperty === 'Data Science' ? '#ff6692' :
-                            task.taskProperty === 'Branding' ? '#36c76c' : '#fff';
+    /// this is for static color for taskproperty
+    // const backgroundColor = task.taskProperty === 'Design' ? '#36c76c' :
+    //     task.taskProperty === 'Developement' ? '#ffd648' :
+    //         task.taskProperty === 'Mobile' ? '#635bff' :
+    //             task.taskProperty === 'UX Stage' ? '#ffd648' :
+    //                 task.taskProperty === 'Research' ? '#46caeb' :
+    //                     task.taskProperty === 'Data Science' ? '#ff6692' :
+    //                         task.taskProperty === 'Branding' ? '#36c76c' : '#fff';
+    // this is for if any edit than use this 
+    const backgroundColor = editedTask.taskProperty === 'Design' ? '#36c76c' :
+        editedTask.taskProperty === 'Developement' ? '#ffd648' :
+            editedTask.taskProperty === 'Mobile' ? '#635bff' :
+                editedTask.taskProperty === 'UX Stage' ? '#ffd648' :
+                    editedTask.taskProperty === 'Research' ? '#46caeb' :
+                        editedTask.taskProperty === 'Data Science' ? '#ff6692' :
+                            editedTask.taskProperty === 'Branding' ? '#36c76c' : '#fff';
 
 
     const handleSaveEditedTask = () => {
-        console.log('Edited Task:', editedTask);
+        // console.log('Edited Task:', editedTask);
+        // setEditedTask(editedTask);
         handleCloseEditModal();
     };
 
     const handleDeleteClick = () => {
         onDeleteTask(task.id);
     };
-
     return (
         <div className='card-body bg-white' >
             <div className='task-header'>
@@ -73,11 +81,11 @@ function TaskCoponent({ task, onDeleteTask }) {
                     <div className="tb-section-1">
                         <span className="hstack gap-2">
                             <CalendarTodayIcon style={{ fontSize: "1.125rem" }} />
-                            {task.date}
+                            {editedTask.date}
                         </span>
                     </div>
                     <div className="tb-section-2">
-                        <span className="badge" style={{ backgroundColor, color: "white" }}>{task.taskProperty}</span>
+                        <span className="badge" style={{ backgroundColor, color: "white" }}>{editedTask.taskProperty}</span>
                     </div>
                 </div>
             </div>

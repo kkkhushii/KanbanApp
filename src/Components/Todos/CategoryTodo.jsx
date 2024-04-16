@@ -12,6 +12,8 @@ function CategoryTodo({ title, tasks, onDeleteCategory, id }) {
     const [newCategoryName, setNewCategoryName] = useState(title);
     const [showEditCategoryModal, setShowEditCategoryModal] = useState(false);
     const [showContainer, setShowContainer] = useState(true);
+    const taskProperties = ['Design', 'Development', 'UI Design', 'Research', 'UX Stage', 'Data Science', 'Branding'];
+
 
 
     // this is for add task in category modal
@@ -31,6 +33,7 @@ function CategoryTodo({ title, tasks, onDeleteCategory, id }) {
         setAllTasks([...allTasks, newTaskText]);
         handleCloseModal();
     };
+    // console.log(allTasks);
     const handleClearAll = () => {
         setAllTasks([]);
     }
@@ -53,7 +56,6 @@ function CategoryTodo({ title, tasks, onDeleteCategory, id }) {
             title === 'Pending' ? 'rgba(70, 202, 235, 0.2)' :
                 title === 'Done' ? '#36c76c2e' : '#dfe5ef';
 
-
     return (
         <div className='task-list-container'>
             {showContainer && title && (
@@ -66,7 +68,8 @@ function CategoryTodo({ title, tasks, onDeleteCategory, id }) {
                             <div className='add-kanban-title'>
                                 {title === 'Todo' ? (<AddIcon onClick={handleShowModal} />) : ('')}
 
-                                <AddNewTaskModal show={showModal} onHide={handleCloseModal} onSave={handleSaveTask} />
+                                <AddNewTaskModal show={showModal} onHide={handleCloseModal} onSave={handleSaveTask} taskProperties={taskProperties} />
+
                                 <EditCategoryModal
                                     showModal={showEditCategoryModal}
                                     handleCloseModal={handleCloseEditCategoryModal}

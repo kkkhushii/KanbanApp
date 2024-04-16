@@ -91,11 +91,6 @@ body .connect-sorting .task-container-header  {
   #dropdown-basic > svg{
     font-size: 16px;
   }
-  /* .icon{
-    background-color: #fff;
-    border-radius: 100%;
-    cursor: pointer;
-  } */
   .custom-toggle{
     background-color: #fff;
     border-radius: 100%;
@@ -120,3 +115,6 @@ color: #635bff;
     color:#29343D ;
 }
 
+.AddTaskstyle{
+    margin-bottom: 10px;
+}
