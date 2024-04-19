@@ -109,7 +109,6 @@ function EditTaskModal({ show, onHide, task, editedTask, setEditedTask, onSave }
                             <DatePicker selected={editedTask.date} onChange={handleDateChange} className="form-control" />
                         </div>
                     </div>
-
                 </form>
             </Modal.Body>
             <Modal.Footer>

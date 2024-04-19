@@ -1,6 +1,9 @@
 import { Modal, Button, Form } from 'react-bootstrap';
+import { useState } from 'react';
 
 function EditCategoryModal({ showModal, handleCloseModal, newCategoryName, setNewCategoryName, handleUpdateCategory }) {
+
+
     return (
         <Modal show={showModal} onHide={handleCloseModal}>
             <Modal.Header closeButton>

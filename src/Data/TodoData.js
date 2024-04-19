@@ -2,6 +2,8 @@ import image1 from '../assets/kanban-img-1.jpg';
 import image2 from '../assets/kanban-img-2.jpg';
 import image3 from '../assets/my-card.jpg';
 import image4 from '../assets/profilebg.jpg';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 
 const TodoData = [
@@ -145,5 +147,7 @@ const TodoData = [
     ]
 }
 ]
+export const mock = new MockAdapter(axios);
 
+mock.onGet('/api/Data/TodoData').reply(200, TodoData);
 export default TodoData;

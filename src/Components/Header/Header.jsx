@@ -1,8 +1,13 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import '../Header/Header.css'
 import HouseIcon from '@mui/icons-material/House';
 import { Modal, Button } from 'react-bootstrap';
-function Header({ onAddCategory }) {
+import TodoDataContext from '../../ContextApi/TodoDataContext';
+
+function Header() {
+
+
+    const { addCategory } = useContext(TodoDataContext);
 
     const [show, setShow] = useState(false);
     const [listName, setListName] = useState('');
@@ -10,11 +15,12 @@ function Header({ onAddCategory }) {
     const handleShow = () => setShow(true);
 
     const handleSave = () => {
-        onAddCategory(listName);
+
+        addCategory(listName);
         setListName('');
         setShow(false);
-    };
 
+    };
     return (
         <>
             <div className="card card-body p-2 mb-2">

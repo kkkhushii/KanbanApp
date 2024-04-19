@@ -8,9 +8,11 @@ import EditTaskModal from '../Todos/TaskModal/EditTaskModal';
 import { useState } from 'react'
 
 function TaskCoponent({ task, onDeleteTask }) {
+
     // edittask
     const [showEditModal, setShowEditModal] = useState(false);
     const [editedTask, setEditedTask] = useState(task);
+
 
     const handleShowEditModal = () => setShowEditModal(true);
     const handleCloseEditModal = () => setShowEditModal(false);
@@ -28,6 +30,7 @@ function TaskCoponent({ task, onDeleteTask }) {
     };
     const handleDeleteClick = () => {
         onDeleteTask(task.id);
+
     };
     return (
         <div className='card-body bg-white' >

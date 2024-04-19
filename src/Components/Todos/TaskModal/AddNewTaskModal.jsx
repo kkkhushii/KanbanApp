@@ -1,45 +1,16 @@
-import { useState, useEffect } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap';
-import { uniqueId } from 'lodash';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-function AddNewList({ show, onHide, onSave, taskProperties }) {
-    const [task, setTask] = useState('');
-    const [taskText, setTaskText] = useState('');
-    const [selectedProperty, setSelectedProperty] = useState('');
-    const [maxId, setMaxId] = useState(5);
-    const [dueDate, setDueDate] = useState();
-    const [imageURL, setImageURL] = useState();
+function AddNewList({ show, onHide, onSave, taskProperties, newTaskData, setNewTaskData, updateTasks }) {
 
-
-    // whenever page load than display current date in datepicker
-    useEffect(() => {
-        setDueDate(new Date());
-    }, [show]);
-
+    const { task, taskText, taskProperty, date, taskImage } = newTaskData;
 
     const handleSave = () => {
-        const formattedDueDate = dueDate ? dueDate.toLocaleDateString('en-US', {
-            day: 'numeric',
-            month: 'long',
-        }) : '';
-
-        const newId = maxId + 1;
-        onSave({ id: newId, task, taskText, taskImage: imageURL, date: formattedDueDate, taskProperty: selectedProperty });
-        setTask('');
-        setTaskText('');
-        setSelectedProperty(selectedProperty);
-        setDueDate(dueDate);
-        setMaxId(prevMaxId => prevMaxId + 1);
-        onHide();
-
+        onSave();
+        updateTasks();
     };
-    const imageChange = (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setImageURL(URL.createObjectURL(e.target.files[0]));
-        }
-    };
+
     return (
         <Modal show={show} onHide={onHide}>
             <Modal.Header closeButton>
@@ -52,7 +23,8 @@ function AddNewList({ show, onHide, onSave, taskProperties }) {
                             type="text"
                             placeholder="task"
                             value={task}
-                            onChange={(e) => setTask(e.target.value)}
+
+                            onChange={(e) => setNewTaskData({ ...newTaskData, task: e.target.value })}
                         />
                     </Form.Group>
                     <Form.Group controlId="taskText" className='AddTaskstyle'>
@@ -62,23 +34,24 @@ function AddNewList({ show, onHide, onSave, taskProperties }) {
                                 rows={2}
                                 placeholder="task text"
                                 value={taskText}
-                                onChange={(e) => setTaskText(e.target.value)}
+                                onChange={(e) => setNewTaskData({ ...newTaskData, taskText: e.target.value })}
                             />
                         </Form.Group>
                         <Form.Group controlId="taskText" className='AddTaskstyle'>
                             <Form.Control
                                 type='text'
-                                placeholder="add image url"
-                                onChange={(e) => setImageURL(e.target.value)}
+                                placeholder="Add image URL"
+                                onChange={(e) => setNewTaskData({ ...newTaskData, taskImage: e.target.value })}
                             />
                         </Form.Group>
-                        <img src={imageURL} alt="Selected" style={{ width: '100%', height: 'auto' }} />
+                        <img src={taskImage} alt="Selected" style={{ width: '100%', height: 'auto' }} />
+
                     </Form.Group>
 
                     <Form.Group controlId="taskProperty" className='AddTaskstyle'>
                         <Form.Select
-                            value={selectedProperty}
-                            onChange={(e) => setSelectedProperty(e.target.value)}
+                            value={taskProperty}
+                            onChange={(e) => setNewTaskData({ ...newTaskData, taskProperty: e.target.value })}
                         >
                             <option value="">Select Task Property</option>
                             {taskProperties.map(property => (
@@ -90,9 +63,9 @@ function AddNewList({ show, onHide, onSave, taskProperties }) {
                     </Form.Group>
                     <Form.Group controlId="dueDate" className='AddTaskstyle'>
                         <DatePicker
-                            selected={dueDate}
+                            selected={date}
                             dateFormat="dd MMMM"
-                            onChange={date => setDueDate(date)}
+                            onChange={(date) => setNewTaskData({ ...newTaskData, date: date.toLocaleDateString('en-US', { day: 'numeric', month: 'long' }) })}
                             className="form-control"
                         />
                     </Form.Group>
